@@ -17,6 +17,7 @@ public class ControllerIndex {
     private JComboBox cmbFiltro;
     static DefaultTableModel modelData;
     private JTable tableInfoPrograms;
+    private InOrderEqual inOrderEqual;
 
     public ControllerIndex(){
         index_view = new Index_View();
@@ -36,6 +37,7 @@ public class ControllerIndex {
         cmbFiltro = index_view.getCmbFiltro();
         cmbFiltro.addItem("Logic 1");
         cmbFiltro.addItem("Logic 2");
+        cmbFiltro.addItem("In order Equal");
     }
 
     private void initListeners(){
@@ -50,8 +52,11 @@ public class ControllerIndex {
             }
             else if (cmbFiltro.getSelectedIndex() == 1){
                 Application.launch(NoTeenSum.class);
+            } else if (cmbFiltro.getSelectedIndex() == 2){
+                inOrderEqual = new InOrderEqual();
+                inOrderEqual.setVisible(true);
             }
-            JOptionPane.showMessageDialog(null, "Aquí va el método para filtrar");
+//            JOptionPane.showMessageDialog(null, "Aquí va el método para filtrar");
         }
     }
 }
