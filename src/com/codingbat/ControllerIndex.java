@@ -3,6 +3,9 @@ package com.codingbat;
 
 //////// ---------------------- CONTROLLER ---------------------- /////////
 
+import com.codingbat.LogicOne.TwoAsOne;
+import com.codingbat.LogicTwo.NoTeenSum;
+import javafx.application.Application;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
@@ -42,6 +45,12 @@ public class ControllerIndex {
     private class BtnFiltroListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
+            if (cmbFiltro.getSelectedIndex() == 0){
+                Application.launch(TwoAsOne.class);
+            }
+            else if (cmbFiltro.getSelectedIndex() == 1){
+                Application.launch(NoTeenSum.class);
+            }
             JOptionPane.showMessageDialog(null, "Aquí va el método para filtrar");
         }
     }
