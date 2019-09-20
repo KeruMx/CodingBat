@@ -10,6 +10,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class ControllerIndex {
     private Index_View index_view;
@@ -34,24 +36,83 @@ public class ControllerIndex {
         modelData = (DefaultTableModel) tableInfoPrograms.getModel();
 
         cmbFiltro = index_view.getCmbFiltro();
+        cmbFiltro.addItem("Warmup-2");
         cmbFiltro.addItem("Logic 1");
         cmbFiltro.addItem("Logic 2");
+        cmbFiltro.addItem("Map-2");
     }
 
     private void initListeners(){
         btnFiltro.addActionListener(new BtnFiltroListener());
+        tableInfoPrograms.addMouseListener(new Eventos());
+
     }
 
     private class BtnFiltroListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
+            for (int i=tableInfoPrograms.getRowCount()-1; i>=0; i--) {
+                modelData.removeRow(modelData.getRowCount()-1);
+            }
             if (cmbFiltro.getSelectedIndex() == 0){
-                Application.launch(TwoAsOne.class);
+                modelData.addRow(new Object[]{"noTriples","Warmup-2","6 Estrellas (Cumplimiento)"});
+                modelData.addRow(new Object[]{"array667","Warmup-2","6 Estrellas (Cumplimiento)"});
             }
-            else if (cmbFiltro.getSelectedIndex() == 1){
-                Application.launch(NoTeenSum.class);
+            if (cmbFiltro.getSelectedIndex() == 1){
+                modelData.addRow(new Object[]{"twoAsOne","Logic-1","8 Estrellas (Cumplimiento)"});
+                modelData.addRow(new Object[]{"dateFashion","Logic-1","8 Estrellas (Cumplimiento)"});
+                modelData.addRow(new Object[]{"inOrderEqual","Logic-1","8 Estrellas (Cumplimiento)"});
             }
-            JOptionPane.showMessageDialog(null, "Aquí va el método para filtrar");
+            if (cmbFiltro.getSelectedIndex() == 2){
+                modelData.addRow(new Object[]{"noTeenSum","Logic-2","3 Estrellas (Cumplimiento)"});
+                modelData.addRow(new Object[]{"blackjack","Logic-2","3 Estrellas (Cumplimiento)"});
+            }
+            if (cmbFiltro.getSelectedIndex() == 3){
+                modelData.addRow(new Object[]{"wordCount","Map-2","3 Estrellas (Cumplimiento)"});
+                modelData.addRow(new Object[]{"firstSwap","Map-2","3 Estrellas (Cumplimiento)"});
+            }
         }
+    }
+
+    public class Eventos implements MouseListener {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if (cmbFiltro.getSelectedIndex() == 0){
+               if (tableInfoPrograms.getSelectedRow() == 0){
+                    //NoTriples
+               }else{
+                   //Array667
+               }
+            }
+            if (cmbFiltro.getSelectedIndex() == 1){
+                if (tableInfoPrograms.getSelectedRow() == 0)
+                    Application.launch(TwoAsOne.class);
+                if (tableInfoPrograms.getSelectedRow() == 1){
+                    //DateFashion
+                }else{
+                    //InOrderEqual
+                }
+            }
+            if (cmbFiltro.getSelectedIndex() == 2){
+                if (tableInfoPrograms.getSelectedRow() == 0)
+                    Application.launch(NoTeenSum.class);
+                else{
+                    //BlackJack
+                }
+            }
+            if (cmbFiltro.getSelectedIndex() == 3){
+                if (tableInfoPrograms.getSelectedRow() == 0){
+                    //WordCount
+                }else{
+                    //FirstSwap
+                }
+            }
+            System.out.println(tableInfoPrograms.getSelectedRow()+"\t"+tableInfoPrograms.getSelectedRowCount());
+        }
+
+        @Override public void mousePressed(MouseEvent e) { }
+        @Override public void mouseReleased(MouseEvent e) { }
+        @Override public void mouseEntered(MouseEvent e) { }
+        @Override public void mouseExited(MouseEvent e) { }
     }
 }
