@@ -14,8 +14,8 @@ Panel panelPrinp = new Panel();
     JTextField date = new JTextField(8);
     JTextField array = new JTextField(8);
     public NoTriples(){
-        setSize(300,200);
-        panelPrinp.setBounds(0,0,300,200);
+        setSize(300,100);
+        panelPrinp.setBounds(0,0,300,100);
         panelPrinp.setLayout(new FlowLayout());
         setContentPane(panelPrinp);
         setLocationRelativeTo(null);
