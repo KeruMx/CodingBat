@@ -98,6 +98,8 @@ public class ControllerIndex {
                     dateFashionrn.setVisible(true);
                 }else{
                     //InOrderEqual
+                    InOrderEqual inOrderEqual = new InOrderEqual();
+                    inOrderEqual.setVisible(true);
                 }
             }
             if (cmbFiltro.getSelectedIndex() == 2){

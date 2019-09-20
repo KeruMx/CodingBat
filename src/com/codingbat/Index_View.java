@@ -15,8 +15,8 @@ public class Index_View extends JFrame{
     private JComboBox cmbFiltro;
     private JButton btnFiltro;
     private JPanel panelFiltro;
-    public static final int WIDTH = 1000;
-    public static final int HEIGHT = 700;
+    public static final int WIDTH = 450;
+    public static final int HEIGHT = 350;
     JMenuBar mb = new JMenuBar();
 //    JMenu logic;
     JMenu exit;

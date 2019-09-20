@@ -108,7 +108,7 @@ public class InOrderEqual extends JFrame {
                 } else {
                     checkEq = false;
                 }
-                result = inOrderEqual(Integer.parseInt(textN1.getText()), Integer.parseInt(textN1.getText()), Integer.parseInt(textN1.getText()), checkEq);
+                result = inOrderEqual(Integer.parseInt(textN1.getText()), Integer.parseInt(textN2.getText()), Integer.parseInt(textN3.getText()), checkEq);
                 terminal.append(" -> inOrderEqual("+textN1.getText()+", "+textN2.getText()+", "+textN3.getText()+", "+checkEq+") → "+result+"\n");
                 textN1.setText("");
                 textN2.setText("");
