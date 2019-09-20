@@ -36,7 +36,7 @@ public class InOrderEqual extends JFrame {
         setTitle("Parcial 1");
         setSize(600, 500);
         setContentPane(panelWrap);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE );
         setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(255, 255, 255));
 

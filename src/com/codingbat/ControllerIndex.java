@@ -96,7 +96,8 @@ public class ControllerIndex {
                     //DateFashion
                     dateFashion dateFashionrn = new dateFashion();
                     dateFashionrn.setVisible(true);
-                }else{
+                }
+                if (tableInfoPrograms.getSelectedRow() == 2){
                     //InOrderEqual
                     InOrderEqual inOrderEqual = new InOrderEqual();
                     inOrderEqual.setVisible(true);
