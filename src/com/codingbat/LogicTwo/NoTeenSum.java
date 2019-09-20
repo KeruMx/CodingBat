@@ -1,6 +1,7 @@
 package com.codingbat.LogicTwo;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -51,9 +52,21 @@ public class NoTeenSum extends Application
         textFieldB = new TextField();   textFieldB.setPromptText("n° b");
         textFieldC = new TextField();   textFieldC.setPromptText("n° c");
         btnObtenerResultado = new Button("Procedimiento");
-        btnObtenerResultado.setOnAction(event -> eventos(true));
+        btnObtenerResultado.setOnAction(event -> {
+            try {
+                eventos(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
         btnSalir = new Button("Salir");
-        btnSalir.setOnAction(event -> eventos(false));
+        btnSalir.setOnAction(event -> {
+            try {
+                eventos(false);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
         lblResultado = new Label("");
         //addComponents
         textFields.getChildren().addAll(textFieldA,textFieldB,textFieldC);
@@ -63,9 +76,11 @@ public class NoTeenSum extends Application
         scene = new Scene(mainPane);
     }
 
-    private void eventos(boolean opcion){
-        if (!opcion)
+    private void eventos(boolean opcion) throws Exception {
+        if (!opcion){
+            this.stop();
             this.stage.close();
+        }
         else{
             a = Integer.parseInt(textFieldA.getText());
             b = Integer.parseInt(textFieldB.getText());
@@ -78,7 +93,6 @@ public class NoTeenSum extends Application
         a = fixTeen(a);
         b = fixTeen(b);
         c = fixTeen(c);
-
         return (a+b+c);
     }
     private int fixTeen(int n){
