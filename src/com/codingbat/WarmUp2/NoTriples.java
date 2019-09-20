@@ -20,6 +20,19 @@ Panel panelPrinp = new Panel();
         setContentPane(panelPrinp);
         setLocationRelativeTo(null);
         init();
+        int[] p1 = new int[] {1, 1, 2, 2, 1};
+        int[] p2 = new int[] {1, 1, 2, 2, 2, 1};
+        int[] p3 = new int[] {1, 1, 1, 2, 2, 2, 1};
+        int[] p4 = new int[] {1, 1, 2, 2, 1, 2, 1};
+        int[] p5 = new int[] {1, 2, 1};
+        int[] p6 = new int[] {1, 1, 1};
+        System.out.println("---------- Pruebas Unitarias -----------");
+        System.out.println("Debe de ser: true y es: "+noTriplesMethod(p1));
+        System.out.println("Debe de ser: false y es: "+noTriplesMethod(p2));
+        System.out.println("Debe de ser: false y es: "+noTriplesMethod(p3));
+        System.out.println("Debe de ser: true y es: "+noTriplesMethod(p4));
+        System.out.println("Debe de ser: true y es: "+noTriplesMethod(p5));
+        System.out.println("Debe de ser: false y es: "+noTriplesMethod(p6));
     }
     public void init(){
         JOptionPane.showMessageDialog(null, "Dada una matriz de entradas, diremos que un triple es un valor que aparece 3 veces seguidas en la matriz. Devuelve verdadero si la matriz no contiene triples.");
