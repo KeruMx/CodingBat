@@ -4,6 +4,7 @@ package com.codingbat;
 //////// ---------------------- CONTROLLER ---------------------- /////////
 
 import com.codingbat.LogicOne.TwoAsOne;
+import com.codingbat.LogicOne.dateFashion;
 import com.codingbat.LogicTwo.NoTeenSum;
 import javafx.application.Application;
 import javax.swing.*;
@@ -89,6 +90,8 @@ public class ControllerIndex {
                     Application.launch(TwoAsOne.class);
                 if (tableInfoPrograms.getSelectedRow() == 1){
                     //DateFashion
+                    dateFashion dateFashionrn = new dateFashion();
+                    dateFashionrn.setVisible(true);
                 }else{
                     //InOrderEqual
                 }
