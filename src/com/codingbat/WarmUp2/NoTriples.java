@@ -25,6 +25,7 @@ Panel panelPrinp = new Panel();
         JOptionPane.showMessageDialog(null, "Dada una matriz de entradas, diremos que un triple es un valor que aparece 3 veces seguidas en la matriz. Devuelve verdadero si la matriz no contiene triples.");
         panelPrinp.add(new Label("Ingresa numeros, separados por comas (,)"));
         panelPrinp.add(array,null);
+        panelPrinp.add(btnCalcular,null);
         btnCalcular.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {

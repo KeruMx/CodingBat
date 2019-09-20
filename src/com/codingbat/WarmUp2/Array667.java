@@ -23,6 +23,7 @@ Panel panelPrinp = new Panel();
         JOptionPane.showMessageDialog(null, "Dada una matriz de ints, devuelve el número de veces que dos 6 están uno al\n lado del otro en la matriz. También cuente las instancias donde el segundo \"6\" es en realidad un 7.");
         panelPrinp.add(new Label("Ingresa numeros 6 o 7, separados por comas (,)"));
         panelPrinp.add(array,null);
+        panelPrinp.add(btnCalcular,null);
         btnCalcular.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {

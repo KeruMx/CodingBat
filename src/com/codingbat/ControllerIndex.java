@@ -6,6 +6,8 @@ package com.codingbat;
 import com.codingbat.LogicOne.TwoAsOne;
 import com.codingbat.LogicOne.dateFashion;
 import com.codingbat.LogicTwo.NoTeenSum;
+import com.codingbat.WarmUp2.Array667;
+import com.codingbat.WarmUp2.NoTriples;
 import javafx.application.Application;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -80,9 +82,11 @@ public class ControllerIndex {
         public void mouseClicked(MouseEvent e) {
             if (cmbFiltro.getSelectedIndex() == 0){
                if (tableInfoPrograms.getSelectedRow() == 0){
-                    //NoTriples
+                   NoTriples noTriples = new NoTriples();
+                   noTriples.setVisible(true);
                }else{
-                   //Array667
+                   Array667 array667 = new Array667();
+                   array667.setVisible(true);
                }
             }
             if (cmbFiltro.getSelectedIndex() == 1){
