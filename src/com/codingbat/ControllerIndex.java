@@ -91,7 +91,7 @@ public class ControllerIndex {
             }
             if (cmbFiltro.getSelectedIndex() == 1){
                 if (tableInfoPrograms.getSelectedRow() == 0)
-                    Application.launch(TwoAsOne.class);
+                    new TwoAsOne();
                 if (tableInfoPrograms.getSelectedRow() == 1){
                     //DateFashion
                     dateFashion dateFashionrn = new dateFashion();
@@ -105,7 +105,7 @@ public class ControllerIndex {
             }
             if (cmbFiltro.getSelectedIndex() == 2){
                 if (tableInfoPrograms.getSelectedRow() == 0)
-                    Application.launch(NoTeenSum.class);
+                    new NoTeenSum();
                 else{
                     //BlackJack
                 }
