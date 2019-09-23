@@ -6,6 +6,7 @@ package com.codingbat;
 import com.codingbat.LogicOne.TwoAsOne;
 import com.codingbat.LogicOne.dateFashion;
 import com.codingbat.LogicTwo.NoTeenSum;
+import com.codingbat.MapTwo.FirstSwap;
 import com.codingbat.WarmUp2.Array667;
 import com.codingbat.WarmUp2.NoTriples;
 import javafx.application.Application;
@@ -116,7 +117,7 @@ public class ControllerIndex {
                 if (tableInfoPrograms.getSelectedRow() == 0){
                     //WordCount
                 }else{
-                    //FirstSwap
+                    new FirstSwap();
                 }
             }
             System.out.println(tableInfoPrograms.getSelectedRow()+"\t"+tableInfoPrograms.getSelectedRowCount());
