@@ -108,6 +108,8 @@ public class ControllerIndex {
                     new NoTeenSum();
                 else{
                     //BlackJack
+                    BlackJack blackJack = new BlackJack();
+                    blackJack.setVisible(true);
                 }
             }
             if (cmbFiltro.getSelectedIndex() == 3){
