@@ -43,7 +43,7 @@ public class NoTeenSum extends JFrame
         panelTextFields.setLayout(layoutBtns_Text);
         panelTitulo.setLayout(layoutBtns_Text);
 
-        JLabel titulo = new JLabel("<html><body><h2>TwoAsOne</h2> " +
+        JLabel titulo = new JLabel("<html><body><h2>NoTeenSum</h2> " +
                 "<p>Given 3 int values (a b c) return their sum. However, if any</p>" +
                 "<p>of the values is a teen in the range 13..19 inclusive then</p>" +
                 "<p>that value counts as 0, except 15 and 16 do not count as a teens</p></body></html>");//+
