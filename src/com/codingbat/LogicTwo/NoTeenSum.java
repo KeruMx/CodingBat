@@ -1,92 +1,124 @@
 package com.codingbat.LogicTwo;
 
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class NoTeenSum extends Application
+public class NoTeenSum extends JFrame
 {
-    private Scene scene;
-    private VBox mainPane;
-    private HBox textFields,botones;
-    private TextField textFieldA,textFieldB,textFieldC;
-    private Button btnSalir,btnObtenerResultado;
-    private Label lblResultado;
+    private JFrame jframe;
+    private JPanel panel,panelBotones,panelTextFields,panelTitulo;
+    private BoxLayout mainLayout;
+    private JTextField textFieldA,textFieldB,textFieldC;
+    private JButton btnSalir,btnObtenerResultado;
+    private JTextArea txtResultado;
+    private JScrollPane scrollTxtResultado;
     private int a,b,c;
-    private Stage stage;
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        this.stage = primaryStage;
+    public NoTeenSum (){
+        super("NoTeenSum");
         this.createAndAddComponents();
-        primaryStage.setScene(scene);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.show();
+        this.setUndecorated(true);
+        this.setSize(500,300);
+        this.setContentPane(panel);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        jframe = this;
     }
 
     private void createAndAddComponents(){
-        mainPane = new VBox(15);
-        mainPane.setAlignment(Pos.CENTER);
-        Label titulo = new Label("NoTeenSum");
-        Label problema = new Label("Given 3 ints, a b c, return their sum. However, if any of the values is a teen\n" +
-                "--in the range 13..19 inclusive -- then that value counts as 0,except 15 and 16\n" +
-                "do not count as a teens. Write a separate helper\n" +
-                "\"public int fixTeen(int n)\"{Takes int value and returns a number for teen rule\n" +
-                "avoiding repeat the teen code 3 times}");
-        titulo.setAlignment(Pos.CENTER);
-        problema.setAlignment(Pos.CENTER);
-        textFields = new HBox(5);
-        textFields.setAlignment(Pos.CENTER);
-        botones = new HBox(5);
-        botones.setAlignment(Pos.CENTER);
-        botones.setSpacing(5);
-        textFieldA = new TextField();   textFieldA.setPromptText("n° a");
-        textFieldB = new TextField();   textFieldB.setPromptText("n° b");
-        textFieldC = new TextField();   textFieldC.setPromptText("n° c");
-        btnObtenerResultado = new Button("Procedimiento");
-        btnObtenerResultado.setOnAction(event -> {
-            try {
-                eventos(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        btnSalir = new Button("Salir");
-        btnSalir.setOnAction(event -> {
-            try {
-                eventos(false);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        lblResultado = new Label("");
-        //addComponents
-        textFields.getChildren().addAll(textFieldA,textFieldB,textFieldC);
-        botones.getChildren().addAll(btnObtenerResultado,btnSalir);
-        mainPane.getChildren().addAll(titulo,problema,textFields,botones,lblResultado);
+        panel = new JPanel();
+        panelTitulo = new JPanel();
+        panelTitulo.setSize(400,150);
+        panelBotones = new JPanel();
+        panelTextFields = new JPanel();
+        mainLayout = new BoxLayout(panel,BoxLayout.Y_AXIS);
+        panel.setLayout(mainLayout);
+        panel.setBorder(new EmptyBorder(new Insets(20,20,20,20)));
 
-        scene = new Scene(mainPane);
+        FlowLayout layoutBtns_Text = new FlowLayout();
+        panelBotones.setLayout(layoutBtns_Text);
+        panelTextFields.setLayout(layoutBtns_Text);
+        panelTitulo.setLayout(layoutBtns_Text);
+
+        JLabel titulo = new JLabel("<html><body><h2>NoTeenSum</h2> " +
+                "<p>Given 3 int values (a b c) return their sum. However, if any</p>" +
+                "<p>of the values is a teen in the range 13..19 inclusive then</p>" +
+                "<p>that value counts as 0, except 15 and 16 do not count as a teens</p></body></html>");//+
+
+        titulo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        textFieldA = new JTextField(8);
+        textFieldB = new JTextField(8);
+        textFieldC = new JTextField(8);
+
+        btnObtenerResultado = new JButton("Caso Unitario");
+        btnObtenerResultado.addActionListener(eventos);
+        btnObtenerResultado.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnSalir = new JButton("X");
+        btnSalir.addActionListener(eventos);
+        btnSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        txtResultado = new JTextArea();
+        txtResultado.setEditable(false);
+        scrollTxtResultado = new JScrollPane(txtResultado);
+        scrollTxtResultado.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+        panelBotones.add(btnObtenerResultado);
+        panelBotones.add(btnSalir);
+        panelTextFields.add(textFieldA);
+        panelTextFields.add(textFieldB);
+        panelTextFields.add(textFieldC);
+        panelTitulo.add(titulo);
+
+        panel.add(panelTitulo);
+        panel.add(panelBotones);
+        panel.add(panelTextFields);
+        panel.add(panelBotones);
+        panel.add(scrollTxtResultado);
+        hacerCasosDePrueba();
     }
 
-    private void eventos(boolean opcion) throws Exception {
-        if (!opcion){
-            this.stop();
-            this.stage.close();
+    private ActionListener eventos = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == btnObtenerResultado){;
+                if (verificarEntrada())
+                    txtResultado.append("noTeenSum("+a+","+b+","+c+") -> "+noTeenSum()+"\n");
+            }if (e.getSource() == btnSalir){
+                jframe.dispose();
+            }
         }
-        else{
-            a = Integer.parseInt(textFieldA.getText());
-            b = Integer.parseInt(textFieldB.getText());
-            c = Integer.parseInt(textFieldC.getText());
-            lblResultado.setText("noTeenSum("+a+","+b+","+c+") -> "+noTeenSum());
-        }
+    };
+
+    private void hacerCasosDePrueba(){
+        a=1;b=2;c=3;
+        txtResultado.append("noTeenSum("+a+","+b+","+c+") -> "+noTeenSum()+"\n");
+        a=3;b=1;c=2;
+        txtResultado.append("noTeenSum("+a+","+b+","+c+") -> "+noTeenSum()+"\n");
+        a=3;b=2;c=2;
+        txtResultado.append("noTeenSum("+a+","+b+","+c+") -> "+noTeenSum()+"\n");
+        a=2;b=3;c=1;
+        txtResultado.append("noTeenSum("+a+","+b+","+c+") -> "+noTeenSum()+"\n");
+        a=5;b=3;c=-2;
+        txtResultado.append("noTeenSum("+a+","+b+","+c+") -> "+noTeenSum()+"\n");
+        a=5;b=3;c=-3;
+        txtResultado.append("noTeenSum("+a+","+b+","+c+") -> "+noTeenSum()+"\n");
+        a=2;b=5;c=3;
+        txtResultado.append("noTeenSum("+a+","+b+","+c+") -> "+noTeenSum()+"\n");
+        a=9;b=5;c=5;
+        txtResultado.append("noTeenSum("+a+","+b+","+c+") -> "+noTeenSum()+"\n");
+        a=9;b=4;c=5;
+        txtResultado.append("noTeenSum("+a+","+b+","+c+") -> "+noTeenSum()+"\n");
+        a=5;b=4;c=9;
+        txtResultado.append("noTeenSum("+a+","+b+","+c+") -> "+noTeenSum()+"\n");
+        a=3;b=3;c=0;
+        txtResultado.append("noTeenSum("+a+","+b+","+c+") -> "+noTeenSum()+"\n");
+        a=3;b=3;c=2;
+        txtResultado.append("noTeenSum("+a+","+b+","+c+") -> "+noTeenSum()+"\n");
+        txtResultado.append("\n");
     }
 
     private int noTeenSum(){
@@ -106,5 +138,17 @@ public class NoTeenSum extends Application
                 break;
         }
         return n;
+    }
+
+    private boolean verificarEntrada(){
+        try{
+            a = Integer.parseInt(textFieldA.getText());
+            b = Integer.parseInt(textFieldB.getText());
+            c = Integer.parseInt(textFieldC.getText());
+            return true;
+        }catch(NumberFormatException nfe){
+            JOptionPane.showMessageDialog(null,"El número que ingreso es incorrecto","Error",JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
     }
 }
