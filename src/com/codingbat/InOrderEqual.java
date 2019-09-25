@@ -33,7 +33,7 @@ public class InOrderEqual extends JFrame {
     boolean result, checkEq;
 
     public InOrderEqual(){
-        setTitle("Parcial 1");
+        setTitle("In Order Equals");
         setSize(600, 500);
         setContentPane(panelWrap);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE );

@@ -115,6 +115,8 @@ public class ControllerIndex {
             if (cmbFiltro.getSelectedIndex() == 3){
                 if (tableInfoPrograms.getSelectedRow() == 0){
                     //WordCount
+                    WordCount wordCount = new WordCount();
+                    wordCount.setVisible(true);
                 }else{
                     //FirstSwap
                 }
