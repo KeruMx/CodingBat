@@ -30,6 +30,7 @@ public class InOrderEqual extends JFrame {
     private JLabel lblI1;
     private JLabel lblI2;
     private JLabel lblI3;
+    private JTextArea terminalPruebas;
     boolean result, checkEq;
 
     public InOrderEqual(){
@@ -40,6 +41,7 @@ public class InOrderEqual extends JFrame {
         setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(255, 255, 255));
 
+        panelWrap.setBackground(Colors.BlueR);
         panelInfo.setBackground(Colors.BlueR);
         lblI1.setForeground(Colors.White);
         lblI2.setForeground(Colors.White);
@@ -64,6 +66,7 @@ public class InOrderEqual extends JFrame {
         initListeners();
     }
 
+
     private void styleButtons(JButton btn) {
         btn.setBorder(new EmptyBorder(5, 10, 5, 10));
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -73,6 +76,26 @@ public class InOrderEqual extends JFrame {
         cmbEqual.addItem("True");
         cmbEqual.addItem("False");
         terminal.append(" -> Bienvenido\n");
+
+        prueba(2, 5, 11, false);
+        prueba(5, 7, 6, false);
+        prueba(5, 5, 7, true);
+        prueba(5, 5, 7, false);
+        prueba(2, 5, 4, false);
+        prueba(3, 4, 3, false);
+        prueba(3, 4, 4, false);
+        prueba(3, 4, 3, true);
+        prueba(3, 4, 4, true);
+        prueba(1, 5, 5, true);
+        prueba(5, 5, 5, true);
+        prueba(2, 2, 1, true);
+        prueba(9, 2, 2, true);
+        prueba(0, 1, 0, true);
+    }
+
+    private void prueba(int a, int b, int c, boolean pruebaCheck){
+        result = inOrderEqual(a, b, c, pruebaCheck);
+        terminalPruebas.append(" -> inOrderEqual("+a+", "+b+", "+c+", "+pruebaCheck+") → "+result+"\n");
     }
 
     private void initListeners(){

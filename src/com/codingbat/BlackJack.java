@@ -24,6 +24,7 @@ public class BlackJack extends JFrame{
     private JPanel panelData3;
     private JLabel lblI1;
     private JLabel lblI2;
+    private JTextArea terminalPruebas;
     int result;
 
     public BlackJack(){
@@ -34,6 +35,7 @@ public class BlackJack extends JFrame{
         setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(255, 255, 255));
 
+        panelWrap.setBackground(Colors.BlueR);
         panelInfo.setBackground(Colors.BlueR);
         lblI1.setForeground(Colors.White);
         lblI2.setForeground(Colors.White);
@@ -60,6 +62,26 @@ public class BlackJack extends JFrame{
 
     private void initComponents(){
         terminal.append(" -> Bienvenido\n");
+        pruebas(19, 21);
+        pruebas(21, 19);
+        pruebas(19, 22);
+        pruebas(22, 19);
+        pruebas(22, 50);
+        pruebas(22, 22);
+        pruebas(33, 1);
+        pruebas(1, 2);
+        pruebas(34, 33);
+        pruebas(17, 19);
+        pruebas(18, 17);
+        pruebas(16, 23);
+        pruebas(3, 4);
+        pruebas(3, 2);
+        pruebas(21, 20);
+    }
+
+    private void pruebas(int a, int b){
+        result = blackJack(a, b);
+        terminalPruebas.append(" -> blackJack("+a+", "+b+") → "+result+"\n");
     }
 
     private void initListeners(){

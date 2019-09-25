@@ -5,6 +5,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -22,10 +24,8 @@ public class WordCount extends JFrame{
     private JLabel lblI1;
     private JLabel lblI2;
     private JLabel lblI3;
-    String cadenaTemp;
-    char readChar;
-    int charFound, charCont, i;
-    boolean error;
+    private JTextArea terminalPruebas;
+    int cantPalabras;
     String[] words;
     Map<String, Integer> mapAux;
 
@@ -37,6 +37,7 @@ public class WordCount extends JFrame{
         setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(255, 255, 255));
 
+        panelWrap.setBackground(Colors.BlueR);
         panelInfo.setBackground(Colors.BlueR);
         lblI1.setForeground(Colors.White);
         lblI2.setForeground(Colors.White);
@@ -61,82 +62,79 @@ public class WordCount extends JFrame{
 
     private void initComponents(){
         terminal.append(" -> Bienvenido\n");
+        String[] prueba1 = {"a", "b", "a", "c", "b"};
+        String[] prueba2 = {"c", "b", "a"};
+        String[] prueba3 = {"c", "c", "c", "c"};
+        String[] prueba4 = {"this", "and", "this", ""};
+        String[] prueba5 = {"x", "y", "x", "Y", "X"};
+        String[] prueba6 = {"123", "0", "123", "1"};
+        String[] prueba7 = {"d", "a", "e", "d", "a", "d", "b", "b", "z", "a", "a", "b", "z", "x", "b", "f", "x", "two", "b", "one", "two"};
+        String[] prueba8 = {"apple", "banana", "apple", "apple", "tea", "coffee", "banana"};
+        printResult(prueba1, terminalPruebas);
+        printResult(prueba2, terminalPruebas);
+        printResult(prueba3, terminalPruebas);
+        printResult(prueba4, terminalPruebas);
+        printResult(prueba5, terminalPruebas);
+        printResult(prueba6, terminalPruebas);
+        printResult(prueba7, terminalPruebas);
+        printResult(prueba8, terminalPruebas);
+    }
+
+    private void printResult(String[] array, JTextArea terminal) {
+        mapAux = wordCount(array);
+        terminal.append(" -> wordCount([");
+        for (int x=0; x<array.length; x++){
+            terminal.append("'"+array[x]+"'");
+            if (x<array.length-1){
+                terminal.append(", ");
+            }
+        }
+        terminal.append("]) → {");
+        for (Map.Entry<String, Integer> entry : mapAux.entrySet()) {
+            terminal.append("'" + entry.getKey() + "': " + entry.getValue().toString() + " ");
+        }
+        terminal.append("} \n");
+        mapAux.clear();
     }
 
     private void initListeners(){
         goButton.addActionListener(new BtnGoButton());
+
+        txtCadena.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent keyEvent) {
+                TxtNumberKeyTyped(keyEvent, txtCadena);
+            }
+        });
+    }
+
+    /* solo caracteres numéricos metodo */
+    private void TxtNumberKeyTyped(KeyEvent evt, JTextField txt){
+        int k = (int) evt.getKeyChar();
+        if (k >= 33 && k <= 47 || k >= 58 && k <= 97) {
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null, "Solo se permiten caracteres Númericos", "Error de ingreso", JOptionPane.ERROR_MESSAGE);
+        } else if (k >= 58) {
+            evt.setKeyChar((char) KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null, "Solo se permiten caracteres Númericos", "Error de ingreso", JOptionPane.ERROR_MESSAGE);
+        } else if (k == 10) {
+            txt.transferFocus();
+        }
     }
 
     int cacracterAscii;
     private class BtnGoButton implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            error = false;
-            charFound = 0;
-            charCont = 0;
             if (txtCadena.getText().length() != 0){
-                cadenaTemp = txtCadena.getText();
-                for (int x=0 ; x < cadenaTemp.length(); x++){
-                    readChar = cadenaTemp.charAt(x);
-                    cacracterAscii = (int)readChar;
-                    if(charFound == 1){
-                        if (cacracterAscii != 32 && cacracterAscii != 44){
-                            error = true;
-                            break;
-                        } else {
-                            charFound = 0;
-                        }
-                    } else {
-                        if (cacracterAscii != 32 || cacracterAscii != 44){
-                            charCont += 1;
-                            charFound = 1;
-                        }
-                    }
+                cantPalabras = Integer.parseInt(txtCadena.getText());
+                words = new String[cantPalabras];
+                for (int x = 0; x < cantPalabras; x++){
+                    words[x] = JOptionPane.showInputDialog(null, "Palabra " + (x+1));
                 }
-                if (error == true){
-                    JOptionPane.showMessageDialog(null, "Error de syntaxis", "Error de syntaxis", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    System.out.println(charCont);
-                    i = 0;
-                    words = new String[charCont];
-                    charFound = 0;
-                    for (int x=0 ; x < cadenaTemp.length(); x++){
-                        readChar = cadenaTemp.charAt(x);
-                        cacracterAscii = (int)readChar;
-                        if(charFound == 1){
-                            if (cacracterAscii != 32 && cacracterAscii != 44){
-                                error = true;
-                                System.out.println("Error");
-                                break;
-                            } else {
-                                charFound = 0;
-                            }
-                        } else {
-                            if (cacracterAscii != 32 || cacracterAscii != 44){
-                                words[i] = String.valueOf(readChar);
-                                i++;
-                                charFound = 1;
-                            }
-                        }
-                    }
-                    mapAux = wordCount(words);
-                    terminal.append(" -> wordCount([");
-                    for (int x=0; x<words.length; x++){
-                        terminal.append("'"+words[x]+"'");
-                        if (x<words.length-1){
-                            terminal.append(", ");
-                        }
-                    }
-                    terminal.append("]) → {");
-                    for (Map.Entry<String, Integer> entry : mapAux.entrySet()) {
-//                        System.out.println(entry.getKey() + ":" + entry.getValue().toString());
-                        terminal.append("'" + entry.getKey() + "': " + entry.getValue().toString() + " ");
-                    }
-                    terminal.append("} \n");
-                    txtCadena.setText("");
-                }
+                printResult(words, terminal);
             } else {
-                JOptionPane.showMessageDialog(null, "Por favor introduce una cadena correcta", "Error de syntaxis", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Por favor introduce una cantidad correcta", "Error de syntaxis", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
